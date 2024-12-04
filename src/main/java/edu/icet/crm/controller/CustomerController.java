@@ -26,9 +26,5 @@ public class CustomerController {
         service.addDetails(customer);
     }
 
-//    @GetMapping("/search-by-id/{id}")
-//    public  Customer searchItemsById(@PathVariable Integer id){
-//        return service.searchItemsById(id);
-//    }
 
 }

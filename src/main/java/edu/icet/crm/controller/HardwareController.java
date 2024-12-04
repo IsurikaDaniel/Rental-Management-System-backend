@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/hardwareItems")
 @RequiredArgsConstructor
-
 public class HardwareController {
     private final HardwareService service;
 

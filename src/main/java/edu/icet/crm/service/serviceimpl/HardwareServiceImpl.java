@@ -1,11 +1,8 @@
 package edu.icet.crm.service.serviceimpl;
 
 import edu.icet.crm.dto.HardwareItems;
-import edu.icet.crm.dto.Rental;
 import edu.icet.crm.entity.HardwareItemsEntity;
-import edu.icet.crm.entity.RentalEntity;
 import edu.icet.crm.repository.HardwareRepository;
-import edu.icet.crm.repository.RentalRepository;
 import edu.icet.crm.service.HardwareService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -13,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class HardwareServiceImpl implements HardwareService {

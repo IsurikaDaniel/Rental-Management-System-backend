@@ -1,9 +1,12 @@
 package edu.icet.crm.controller;
 
+import edu.icet.crm.dto.ApiResponse;
+import edu.icet.crm.dto.Customer;
 import edu.icet.crm.dto.Rental;
 import edu.icet.crm.service.RentalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +26,15 @@ public class RentalController {
 
     @PostMapping("/add-rental")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addRental(@RequestBody Rental rental){
-        service.addRental(rental);
+    public ResponseEntity<ApiResponse> addRental(@RequestBody Rental rental){
+
+        try {
+            service.addRental(rental);
+            return ResponseEntity.ok(new ApiResponse("200", "Rental added successfully.", true));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse("400", "Failed to add Rental: " + e.getMessage(), false));
+        }
     }
 
     @PutMapping("/update-rental")

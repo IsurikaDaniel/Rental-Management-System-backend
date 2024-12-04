@@ -1,9 +1,12 @@
 package edu.icet.crm.controller;
 
+import edu.icet.crm.dto.ApiResponse;
 import edu.icet.crm.dto.HardwareItems;
+import edu.icet.crm.dto.Rental;
 import edu.icet.crm.service.HardwareService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +25,15 @@ public class HardwareController {
 
     @PostMapping("/add-hardwareItems")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addItems(@RequestBody HardwareItems hardwareItems){
-        service.addItems(hardwareItems);
+    public ResponseEntity<ApiResponse> addItems(@RequestBody HardwareItems hardwareItems){
+
+        try {
+            service.addItems(hardwareItems);
+            return ResponseEntity.ok(new ApiResponse("200", "Rental added successfully.", true));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse("400", "Failed to add Rental: " + e.getMessage(), false));
+        }
     }
 
     @PutMapping("/update-hardwareItems")
